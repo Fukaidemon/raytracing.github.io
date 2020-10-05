@@ -88,6 +88,10 @@ hittable_list cornell_box() {
     return world;
 }
 
+TEST(BasicTest, BaseTestWorks) {
+    int testingInt = 0;
+    EXPECT_EQ(0, testingInt);
+}
 
 int main(int argc, char* argv[]) {
 
@@ -97,7 +101,7 @@ int main(int argc, char* argv[]) {
     // Image
 
     const auto aspect_ratio = 1.0 / 1.0;
-    const int image_width = 600;
+    const int image_width = 20;
     const int image_height = static_cast<int>(image_width / aspect_ratio);
     const int samples_per_pixel = 100;
     const int max_depth = 50;
