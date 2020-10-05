@@ -93,11 +93,7 @@ TEST(BasicTest, BaseTestWorks) {
     EXPECT_EQ(0, testingInt);
 }
 
-int main(int argc, char* argv[]) {
-
-    // Init GoogleTest
-    testing::InitGoogleTest(&argc, argv);
-
+TEST(MainTest, TestAllFunctionalities) {
     // Image
 
     const auto aspect_ratio = 1.0 / 1.0;
@@ -114,7 +110,7 @@ int main(int argc, char* argv[]) {
 
     auto world = cornell_box();
 
-    color background(0,0,0);
+    color background(0, 0, 0);
 
     // Camera
 
@@ -128,18 +124,18 @@ int main(int argc, char* argv[]) {
     auto t1 = 1.0;
 
     camera cam(lookfrom, lookat, vup, vfov, aspect_ratio, aperture, dist_to_focus, t0, t1);
-    
+
     // Render
 
     std::cout << "P3\n" << image_width << ' ' << image_height << "\n255\n";
 
-    for (int j = image_height-1; j >= 0; --j) {
+    for (int j = image_height - 1; j >= 0; --j) {
         std::cerr << "\rScanlines remaining: " << j << ' ' << std::flush;
         for (int i = 0; i < image_width; ++i) {
-            color pixel_color(0,0,0);
+            color pixel_color(0, 0, 0);
             for (int s = 0; s < samples_per_pixel; ++s) {
-                auto u = (i + random_double()) / (image_width-1);
-                auto v = (j + random_double()) / (image_height-1);
+                auto u = (i + random_double()) / (image_width - 1);
+                auto v = (j + random_double()) / (image_height - 1);
                 ray r = cam.get_ray(u, v);
                 pixel_color += ray_color(r, background, world, lights, max_depth);
             }
@@ -149,6 +145,12 @@ int main(int argc, char* argv[]) {
 
     std::cerr << "\nDone.\n";
 
-    //
+}
+int main(int argc, char* argv[]) {
+
+    // Init GoogleTest
+    testing::InitGoogleTest(&argc, argv);
+
+    // Running all the given tests
     return RUN_ALL_TESTS();
 }
