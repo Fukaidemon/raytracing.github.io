@@ -20,7 +20,7 @@
 #include "sphere.h"
 
 #include <iostream>
-
+#include "gtest/gtest.h"
 
 color ray_color(
     const ray& r,
@@ -89,7 +89,11 @@ hittable_list cornell_box() {
 }
 
 
-int main() {
+int main(int argc, char* argv[]) {
+
+    // Init GoogleTest
+    testing::InitGoogleTest(&argc, argv);
+
     // Image
 
     const auto aspect_ratio = 1.0 / 1.0;
@@ -140,4 +144,7 @@ int main() {
     }
 
     std::cerr << "\nDone.\n";
+
+    //
+    return RUN_ALL_TESTS();
 }
